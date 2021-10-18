@@ -4,5 +4,8 @@
 
 For example: 
 
-- 2021-10-15 18:00 Worked for 1 hour. I have done:
-  - *List the things you have done.*
+- 2021-10-18 18:04 Worked for 1 hour and 10 minutes. I have done:
+  - Basic character information
+  - Buttons
+  - A few functions
+  - Beginning of story
