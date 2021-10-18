@@ -7,6 +7,8 @@ Project Instructions: https://vuxcode.netlify.app/pr1/lessons/major-project-brie
 
 REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
+I'm having a bit of trouble currently, it seems I've gotten a bit confused by how to write it.
+
 # Project Summary
 
 > Remember that before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
