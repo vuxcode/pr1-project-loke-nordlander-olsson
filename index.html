@@ -1,1 +1,72 @@
-<!-- Start writing your project code in this file! -->
+<!-- Various buttons with different functions -->
+<button onclick="locations()">Locations</button>
+
+<button onclick="move()">Move</button>
+
+<button onclick="attack()">Attack</button>
+
+<button onclick="characterInfo()">Character</button>
+
+<p id="information">Events go here<p>
+
+<script>
+	//Asks for your name in a prompt
+	var adventurer = prompt("What is your name adventurer?");
+
+	//Explains your fate
+	alert("Your name is " + adventurer + ", a cultist from the town of Arklewood.\nYou come from a long line of cultists with a mysterious past.\nYour goal is to break away from tradition and pursue a new path in life.");
+
+	var places = ["Arklewood", "Loftwer", "Forest of Peril"];
+
+	alert("You are currently in " + places[1] + ".");
+
+	//Extra information about where you can find earlier info
+	alert("Check the console for previously attained information of your current playthrough.")
+	
+	//Shows where you can go
+	function locations() {
+		alert("The following locations are available:\n" + places[0] + "\n" + places[1] + "\n" + places[2]);
+	}
+
+	//Character base level
+	var level = 1;
+
+	//Character base experience
+	var xp = 0;
+
+	//The enemies you'll encounter in the game
+	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer"];
+
+	//Displays info about your character
+	function characterInfo() {
+		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp);
+	}
+
+	//Move your character to a different location
+	function move() {
+		var travel = prompt("Where do you want to go?");
+
+		if (travel.toLowerCase() == "ARKLEWOOD") {
+			alert("You are now in " + places[0]);
+		}
+		else if (travel.toLowerCase() == "LOFTWER") {
+			alert("You are now in " + places[1]);
+		}
+		else if (travel.toLowerCase() == "FOREST OF PERIL") {
+			alert("You are now in " + places[2]);
+		}
+		else {
+			alert("There is no place with that name.")
+		}
+	}
+
+	//Function to choose which enemy to attack
+	function attack() {
+		prompt("Which enemy do you want to attack?");
+	}
+
+	//A function that tells you when you've levelled up and the level you reached
+	function levelUp() {
+		alert("Congrats, you are now level " + level);
+	}
+</script>
