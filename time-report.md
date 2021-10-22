@@ -9,3 +9,7 @@ For example:
   - Buttons
   - A few functions
   - Beginning of story
+
+- 2021-10-21 18:55 Worked for 1 hour and 10 minutes I have done:
+  - A bit of the damage function
+  - Fixed issue with locations
