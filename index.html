@@ -7,6 +7,8 @@
 
 <button onclick="characterInfo()">Character</button>
 
+<button onclick="attackDamage(15, 30)">Test</button>
+
 <p id="information">Events go here<p>
 
 <script>
@@ -34,8 +36,14 @@
 	//Character base experience
 	var xp = 0;
 
+	//Character health
+	var health = 100;
+
 	//The enemies you'll encounter in the game
-	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer"];
+	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer", "Skeleton", "Drunk"];
+
+	//Health of enemy, 80% of the player's health
+	var enemyHealth = health * 0.8;
 
 	//Displays info about your character
 	function characterInfo() {
@@ -46,23 +54,32 @@
 	function move() {
 		var travel = prompt("Where do you want to go?");
 
-		if (travel.toLowerCase() == "ARKLEWOOD") {
-			alert("You are now in " + places[0]);
+		if (travel.toLowerCase() == "arklewood") {
+			alert("You are now in " + places[0] + ".");
 		}
-		else if (travel.toLowerCase() == "LOFTWER") {
-			alert("You are now in " + places[1]);
+		else if (travel.toLowerCase() == "loftwer") {
+			alert("You are now in " + places[1] + ".");
 		}
-		else if (travel.toLowerCase() == "FOREST OF PERIL") {
-			alert("You are now in " + places[2]);
+		else if (travel.toLowerCase() == "forest of peril") {
+			alert("You are now in " + places[2] + ".");
 		}
 		else {
-			alert("There is no place with that name.")
+			alert("There is no place with that name.");
 		}
 	}
 
-	//Function to choose which enemy to attack
+	//Function to pick an enemy at random
 	function attack() {
-		prompt("Which enemy do you want to attack?");
+		enemy.sort(() => Math.random() - 0.5);
+		alert("You encounter a " + enemy[0] + ".");
+		var action = prompt("Do you want to 'attack', 'defend', 'heal' or 'run'?\nWrite which move you wanna use.")
+		// if (action.toLowerCase() == "attack") {}
+
+	//Picks a number between minimum and maximum to randomize damage
+	function attackDamage(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		var damage = Math.floor(Math.random() * (max - min + 1) + min);
 	}
 
 	//A function that tells you when you've levelled up and the level you reached
