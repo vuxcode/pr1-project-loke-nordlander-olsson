@@ -8,4 +8,4 @@ Not fixed:
 
 Fixed:
 
-1. Problem: The if and else if elements don't recognise words that are being input.
+1. Problem: The if and else if elements don't recognise words that are being input. It had to do with the fact I had .toLowerCase with uppercase letters.
