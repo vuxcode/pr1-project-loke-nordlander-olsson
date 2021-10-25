@@ -43,9 +43,22 @@
 	//Health of enemy, 80% of the player's health
 	var enemyHealth = health * 0.8;
 
+	var damage = 0;
+
 	//Displays info about your character
 	function characterInfo() {
 		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp);
+	}
+
+	//A function that tells you when you've levelled up and the level you reached
+	function levelUp() {
+		if (xp >= 100) {
+			level++;
+			alert("Congrats, you are now level " + level);			
+		}
+		else {
+			var none = false;
+		}
 	}
 
 	//Move your character to a different location
@@ -69,7 +82,7 @@
 	function attackDamage(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
-		var damage = Math.floor(Math.random() * (max - min + 1) + min);
+		damage = Math.floor(Math.random() * (max - min + 1) + min);
 		console.log(damage);
 	}
 
@@ -77,22 +90,20 @@
 	function attack() {
 		enemy.sort(() => Math.random() - 0.5);
 		alert("You encounter a " + enemy[0] + ".");
-		var action = prompt("Do you want to 'attack', 'defend', 'heal' or 'run'?\nWrite which move you wanna use.")
-		if (action.toLowerCase() == "attack") {
-			attackDamage(15, 30);
-			alert("The " + enemy[0] + " took " + damage + " damage and now has " + health);
+		while (enemyHealth > 0) {
+			var action = prompt("Do you want to 'attack', 'defend', 'heal' or 'run'?\nWrite which move you wanna use.")
+			if (action.toLowerCase() == "attack") {
+				attackDamage(15, 30);
+				enemyHealth = enemyHealth - damage;
+				alert("The " + enemy[0] + " took " + damage + " damage and now has " + enemyHealth + " healthpoints.");
+			}
+			else {
+				alert("You accidentally trip and the enemy doesn't even bother to fight you.");
+			}
 		}
-		else {
-			alert("You accidentally trip and the enemy doesn't even bother to fight you.\nAnother enemy appears.");
-			attack();
-			return;
-		}
+		health = 100;
+		enemyHealth = health * 0.8;
+		alert("You win against the " + enemy[0] + " and gain " + xp + " experience.");
 	}
 
-	//A function that tells you when you've levelled up and the level you reached
-	function levelUp() {
-		alert("Congrats, you are now level " + level);
-	}
-
-	// 30 mins spent on fixing attack mechanic
 </script>
