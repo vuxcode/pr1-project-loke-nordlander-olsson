@@ -9,8 +9,6 @@
 
 <button onclick="attackDamage(15, 30)">Test</button>
 
-<p id="information">Events go here<p>
-
 <script>
 	//Asks for your name in a prompt
 	var adventurer = prompt("What is your name adventurer?");
@@ -23,7 +21,7 @@
 	alert("You are currently in " + places[1] + ".");
 
 	//Extra information about where you can find earlier info
-	alert("Check the console for previously attained information of your current playthrough.")
+	alert("Check the console for previously attained information of your current playthrough.");
 	
 	//Shows where you can go
 	function locations() {
@@ -67,23 +65,34 @@
 			alert("There is no place with that name.");
 		}
 	}
+	//Picks a number between minimum and maximum to randomize damage
+	function attackDamage(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		var damage = Math.floor(Math.random() * (max - min + 1) + min);
+		console.log(damage);
+	}
 
 	//Function to pick an enemy at random
 	function attack() {
 		enemy.sort(() => Math.random() - 0.5);
 		alert("You encounter a " + enemy[0] + ".");
 		var action = prompt("Do you want to 'attack', 'defend', 'heal' or 'run'?\nWrite which move you wanna use.")
-		// if (action.toLowerCase() == "attack") {}
-
-	//Picks a number between minimum and maximum to randomize damage
-	function attackDamage(min, max) {
-		min = Math.ceil(min);
-		max = Math.floor(max);
-		var damage = Math.floor(Math.random() * (max - min + 1) + min);
+		if (action.toLowerCase() == "attack") {
+			attackDamage(15, 30);
+			alert("The " + enemy[0] + " took " + damage + " damage and now has " + health);
+		}
+		else {
+			alert("You accidentally trip and the enemy doesn't even bother to fight you.\nAnother enemy appears.");
+			attack();
+			return;
+		}
 	}
 
 	//A function that tells you when you've levelled up and the level you reached
 	function levelUp() {
 		alert("Congrats, you are now level " + level);
 	}
+
+	// 30 mins spent on fixing attack mechanic
 </script>
