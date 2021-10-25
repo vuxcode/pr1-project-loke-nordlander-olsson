@@ -4,8 +4,8 @@
 
 Not fixed:
 
-1. Problem: The script end tag says unexpected end of input in console.
 
 Fixed:
 
 1. Problem: The if and else if elements don't recognise words that are being input. It had to do with the fact I had .toLowerCase with uppercase letters.
+2. Problem: The script end tag says unexpected end of input in console. Accidentally deleted a curly bracket when coding, fixed by adding it.
