@@ -21,6 +21,7 @@
   - Changed some code around the levelling system to make it more refined
   - The battle properly ends now when either you or the enemy loses all health, win = xp while loss = nothing
   - Enemy and your character scale in health and damage according to level
+  - Added comments to the code explaining more in-depth about how it works
 
 
 Total time spent: 5 hours and 5 minutes.
