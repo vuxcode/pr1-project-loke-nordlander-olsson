@@ -7,9 +7,11 @@ Project Instructions: https://vuxcode.netlify.app/pr1/lessons/major-project-brie
 
 REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
-I'm having a bit of trouble currently, it seems I've gotten a bit confused by how to write it.
-The beginning was a bit easier to structure but as soon as it came to math, it became a bit harder.
-I've been looking at other places than just vuxcode for better understanding of how I can write the code.
+10/18 - I'm having a bit of trouble currently, it seems I've gotten a bit confused by how to write it.
+
+10/22 - The beginning was a bit easier to structure but as soon as it came to math, it became a bit harder. I've been looking at other places than just vuxcode for better understanding of how I can write the code.
+
+10/29 - It has gotten much easier once I began structuring the systems on which the game will be based on. Both attack, defend and ending the battle have been implemented. Even the levelling system is looking better by each change.
 
 # Project Summary
 
