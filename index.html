@@ -7,8 +7,6 @@
 
 <button onclick="characterInfo()">Character</button>
 
-<button onclick="attackDamage(15, 30)">Test</button>
-
 <script>
 	//Asks for your name in a prompt
 	var adventurer = prompt("What is your name adventurer?");
@@ -16,6 +14,7 @@
 	//Explains your fate
 	alert("Your name is " + adventurer + ", a cultist from the town of Arklewood.\nYou come from a long line of cultists with a mysterious past.\nYour goal is to break away from tradition and pursue a new path in life.");
 
+	//Array with places you can visit
 	var places = ["Arklewood", "Loftwer", "Forest of Peril"];
 
 	alert("You are currently in " + places[1] + ".");
@@ -35,7 +34,7 @@
 	var xp = 0;
 
 	//Character health
-	var health = 100;
+	var health = 100 * level;
 
 	//The enemies you'll encounter in the game
 	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer", "Skeleton", "Drunk"];
@@ -43,18 +42,22 @@
 	//Health of enemy, 80% of the player's health
 	var enemyHealth = health * 0.8;
 
+	//Base damage, used in the attackDamage function
 	var damage = 0;
 
 	//Displays info about your character
 	function characterInfo() {
-		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp);
+		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp + "\nHealth: " + health);
 	}
 
 	//A function that tells you when you've levelled up and the level you reached
 	function levelUp() {
+		//If xp is equal to or higher than 100, your level increases and congratulates you
+		//It then resets the xp
 		if (xp >= 100) {
 			level++;
-			alert("Congrats, you are now level " + level);			
+			alert("Congrats, you are now level " + level);
+			xp = 0;			
 		}
 		else {
 			var none = false;
@@ -64,7 +67,6 @@
 	//Move your character to a different location
 	function move() {
 		var travel = prompt("Where do you want to go?");
-
 		if (travel.toLowerCase() == "arklewood") {
 			alert("You are now in " + places[0] + ".");
 		}
@@ -78,32 +80,75 @@
 			alert("There is no place with that name.");
 		}
 	}
+
 	//Picks a number between minimum and maximum to randomize damage
 	function attackDamage(min, max) {
 		min = Math.ceil(min);
 		max = Math.floor(max);
 		damage = Math.floor(Math.random() * (max - min + 1) + min);
-		console.log(damage);
 	}
 
-	//Function to pick an enemy at random
+	//Function for the battle system
 	function attack() {
+		//Sorts the enemy and then randomizes them
 		enemy.sort(() => Math.random() - 0.5);
 		alert("You encounter a " + enemy[0] + ".");
-		while (enemyHealth > 0) {
-			var action = prompt("Do you want to 'attack', 'defend', 'heal' or 'run'?\nWrite which move you wanna use.")
+		//While enemy's health or your health is above 0, the fight continues
+		while (enemyHealth > 0 && health > 0) {
+			//Asks what move you wanna use
+			var action = prompt("Do you want to 'attack', 'defend' or 'heal'?\nWrite which move you wanna use or click cancel if you want to leave the fight.");
+			//Depending on what you write in, different moves are done
+			//Writing in attack makes the attackDamage function randomize a number
+			//It then multiplies it by the level your character is at and removes the damage from their health
+			//Then it does the same thing for the enemy
 			if (action.toLowerCase() == "attack") {
 				attackDamage(15, 30);
+				damage = damage * level;
 				enemyHealth = enemyHealth - damage;
 				alert("The " + enemy[0] + " took " + damage + " damage and now has " + enemyHealth + " healthpoints.");
+				attackDamage(10, 25);
+				damage = damage * level;
+				health = health - damage;
 			}
+			//Triggers the enemy attack damage that gets multiplied by level
+			//Then it divides it by 1.3 and rounds it to the closest integer
+			//Then it subtracts the damage from the health
+			else if (action.toLowerCase() == "defend") {
+				attackDamage(10, 25);
+				damage = damage * level;
+				damage = damage / 1.3;
+				damage = Math.round(damage);
+				health = health - damage;
+				alert("You blocked the attack and negated some of the damage.");
+			}
+			//Alerts you if you write in an invalid command
+			//Returns to the beginning of the attack function and starts over
 			else {
 				alert("You accidentally trip and the enemy doesn't even bother to fight you.");
+				attack();
+				return;
 			}
+			//Tells you how much damage you took and how much health you have now
+			alert("You took " + damage + " damage and your health is now " + health + ".");
 		}
-		health = 100;
+		//If the enemy has equal to or less than 0 in their health
+		//Then it alerts that you've won and gain 50 xp
+		//It also triggers the levelUp function that checks if your xp is 100
+		if (enemyHealth <= 0) {
+			xp = xp + 50;
+			alert("You win against the " + enemy[0] + " and gain 50 experience.");
+			levelUp();
+		}
+		//Tells you that you lost against the enemy
+		else {
+			alert("You lost against the " + enemy[0] + " and gain nothing.")
+		}
+		//Resets your health to 100 and multiplies it by level
+		//Same for the enemy except it multiplies from your health by 0.8
+		health = 100 * level;
 		enemyHealth = health * 0.8;
-		alert("You win against the " + enemy[0] + " and gain " + xp + " experience.");
 	}
 
+//May test out adding 'number' * level inside of the attackDamage functions
+//Just to test out adding more difficulty
 </script>
