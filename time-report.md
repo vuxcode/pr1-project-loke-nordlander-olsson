@@ -23,5 +23,13 @@
   - Enemy and your character scale in health and damage according to level
   - Added comments to the code explaining more in-depth about how it works
 
+- 2021-11-01 19:16 Worked for 1 hour and 15 minutes. I have done:
+  - Added heal system, you can now heal
+  - Healing system is also definite, limited number of potions
+  - Added more variables that work with the heal system
+  - Added placeholder in places where I don't want anything to happen, specifically else statement
+  - Added more info regarding how the program works
+  - Xp variable now uses += instead of repeating xp
 
-Total time spent: 5 hours and 5 minutes.
+
+Total time spent: 6 hours and 20 minutes.
