@@ -36,6 +36,9 @@
 	//Character health
 	var health = 100 * level;
 
+	//The global character health, used in healing to have a threshold
+	var globalHealth = health;
+
 	//The enemies you'll encounter in the game
 	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer", "Skeleton", "Drunk"];
 
@@ -44,6 +47,12 @@
 
 	//Base damage, used in the attackDamage function
 	var damage = 0;
+
+	//The base amount of health potions that the user starts with
+	var healthPotion = 3;
+
+	//A placeholde used when you want nothing to happend in one part of the code
+	var placeholder = false;
 
 	//Displays info about your character
 	function characterInfo() {
@@ -59,8 +68,9 @@
 			alert("Congrats, you are now level " + level);
 			xp = 0;			
 		}
+		//Stops the function
 		else {
-			var none = false;
+			return;
 		}
 	}
 
@@ -121,12 +131,59 @@
 				health = health - damage;
 				alert("You blocked the attack and negated some of the damage.");
 			}
+			//Choosing heal will give you more healthpoints
+			else if (action.toLowerCase() == "heal") {
+				//Tells you how many healt potions you have left
+				alert("You have " + healthPotion + " health potions left.")
+				//Asks which health potion you want to use
+				var heal = prompt("Do you wanna use a large or small health potion?");
+				//If you have 1 or more health potions, you can heal
+				//It will otherwise alert you that there are none to use
+				if (healthPotion > 0) {
+					if (heal.toLowerCase() == "large" || "large health potion") {
+						//Variable that defines how much you heal in percentage
+						//Depends on max health/global health
+						var larHealthPotion = globalHealth * 0.3;
+						//Adds that number to the health
+						health += larHealthPotion;
+						//Removes one potion so you can't heal forever
+						healthPotion -= 1;
+						//If the health exceeds the max health, reverts it to the max hp
+						if (health > globalHealth) {
+							health = globalHealth;
+						}
+						//Placeholder, nothing happens
+						else {
+							placeholder;
+						}
+					}
+					//Same as the previous if statement
+					else if (action.toLowerCase() == "small" || "small health potion") {
+						var smaHealthPotion = globalHealth * 0.15;
+						health += smaHealthPotion;
+						healthPotion -= 1;
+						if (health > globalHealth) {
+							health = globalHealth;
+						}
+						else {
+							placeholder;
+						}
+					}
+					//If you write in anything else then it tells you this
+					else {
+						alert("Please pick a large or small health potion. Nothing else.");
+					}
+				}
+				else {
+					alert("You don't have any health potions.")
+				}
+			}
+
 			//Alerts you if you write in an invalid command
 			//Returns to the beginning of the attack function and starts over
 			else {
 				alert("You accidentally trip and the enemy doesn't even bother to fight you.");
-				attack();
-				return;
+				return attack();
 			}
 			//Tells you how much damage you took and how much health you have now
 			alert("You took " + damage + " damage and your health is now " + health + ".");
@@ -135,7 +192,7 @@
 		//Then it alerts that you've won and gain 50 xp
 		//It also triggers the levelUp function that checks if your xp is 100
 		if (enemyHealth <= 0) {
-			xp = xp + 50;
+			xp += 50;
 			alert("You win against the " + enemy[0] + " and gain 50 experience.");
 			levelUp();
 		}
