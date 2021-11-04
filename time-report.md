@@ -31,5 +31,8 @@
   - Added more info regarding how the program works
   - Xp variable now uses += instead of repeating xp
 
+- 2021-11-04 19:38 Worked for 35 minutes. I have done:
+  - Added console log to check previous actions.
 
-Total time spent: 6 hours and 20 minutes.
+
+Total time spent: 6 hours and 55 minutes.
