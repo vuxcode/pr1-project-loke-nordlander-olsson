@@ -54,6 +54,8 @@
 	//A placeholde used when you want nothing to happend in one part of the code
 	var placeholder = false;
 
+	var consoleInfo = ["Player levelled up: ", "Current location: ", "Enemy defeated: ", "Enemy health: ", "Player health: ", "Player lost.", "Encountered: "]
+
 	//Displays info about your character
 	function characterInfo() {
 		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp + "\nHealth: " + health);
@@ -65,11 +67,13 @@
 		//It then resets the xp
 		if (xp >= 100) {
 			level++;
-			alert("Congrats, you are now level " + level);
-			xp = 0;			
+			alert("Congrats, you are now level " + level + ".");
+			xp = 0;
+			console.log(consoleInfo[0] + level);			
 		}
 		//Stops the function
 		else {
+			console.log("Player did not level up from this battle.")
 			return;
 		}
 	}
@@ -79,12 +83,15 @@
 		var travel = prompt("Where do you want to go?");
 		if (travel.toLowerCase() == "arklewood") {
 			alert("You are now in " + places[0] + ".");
+			console.log(consoleInfo[1] + places[0]);
 		}
 		else if (travel.toLowerCase() == "loftwer") {
 			alert("You are now in " + places[1] + ".");
+			console.log(consoleInfo[1] + places[1]);
 		}
 		else if (travel.toLowerCase() == "forest of peril") {
 			alert("You are now in " + places[2] + ".");
+			console.log(consoleInfo[1] + places[2]);
 		}
 		else {
 			alert("There is no place with that name.");
@@ -103,6 +110,7 @@
 		//Sorts the enemy and then randomizes them
 		enemy.sort(() => Math.random() - 0.5);
 		alert("You encounter a " + enemy[0] + ".");
+		console.log(consoleInfo[6] + enemy[0]);
 		//While enemy's health or your health is above 0, the fight continues
 		while (enemyHealth > 0 && health > 0) {
 			//Asks what move you wanna use
@@ -116,6 +124,8 @@
 				damage = damage * level;
 				enemyHealth = enemyHealth - damage;
 				alert("The " + enemy[0] + " took " + damage + " damage and now has " + enemyHealth + " healthpoints.");
+				console.log("Enemy took " + damage + " points of damage.");
+				console.log(consoleInfo[3] + enemyHealth);
 				attackDamage(10, 25);
 				damage = damage * level;
 				health = health - damage;
@@ -187,6 +197,8 @@
 			}
 			//Tells you how much damage you took and how much health you have now
 			alert("You took " + damage + " damage and your health is now " + health + ".");
+			console.log("Player took " + damage + " points of damage.");
+			console.log(consoleInfo[4] + health);
 		}
 		//If the enemy has equal to or less than 0 in their health
 		//Then it alerts that you've won and gain 50 xp
@@ -194,11 +206,14 @@
 		if (enemyHealth <= 0) {
 			xp += 50;
 			alert("You win against the " + enemy[0] + " and gain 50 experience.");
+			console.log(consoleInfo[2] + enemy[0]);
+			console.log("Player gained 50 experience.");
 			levelUp();
 		}
 		//Tells you that you lost against the enemy
 		else {
 			alert("You lost against the " + enemy[0] + " and gain nothing.")
+			console.log(consoleInfo[5] + enemy[0]);
 		}
 		//Resets your health to 100 and multiplies it by level
 		//Same for the enemy except it multiplies from your health by 0.8
