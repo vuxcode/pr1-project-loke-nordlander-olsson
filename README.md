@@ -13,6 +13,8 @@ REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
 10/29 - It has gotten much easier once I began structuring the systems on which the game will be based on. Both attack, defend and ending the battle have been implemented. Even the levelling system is looking better by each change.
 
+11/08 - Had a bit of trouble with what could be added onto the adventure but finally got around to getting started with the merchant.
+
 # Project Summary
 
 > Remember that before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
