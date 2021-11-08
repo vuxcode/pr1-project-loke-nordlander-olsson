@@ -34,5 +34,11 @@
 - 2021-11-04 19:38 Worked for 35 minutes. I have done:
   - Added console log to check previous actions.
 
+- 2021-11-08 Worked for 1 hour and 20 minutes. I have done:
+  - Added first merchant iteration
+  - Added a unique message the first time you encounter her
+  - Created a button that is either enabled or disabled depending on current location
+  - Thought of certain mechanics that might be added in the future, noted down as comment
 
-Total time spent: 6 hours and 55 minutes.
+
+Total time spent: 8 hours and 15 minutes.
