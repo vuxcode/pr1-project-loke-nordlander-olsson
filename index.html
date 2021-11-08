@@ -7,6 +7,8 @@
 
 <button onclick="characterInfo()">Character</button>
 
+<button onclick="merchant()" id="merchant">Merchant</button>
+
 <script>
 	//Asks for your name in a prompt
 	var adventurer = prompt("What is your name adventurer?");
@@ -14,9 +16,18 @@
 	//Explains your fate
 	alert("Your name is " + adventurer + ", a cultist from the town of Arklewood.\nYou come from a long line of cultists with a mysterious past.\nYour goal is to break away from tradition and pursue a new path in life.");
 
+	//Hint for where you can find potions
+	alert("There is only one known merchant in the area and she resides in a small cornerstore in Loftwer.\nBe careful though, she may not offer what you seek.");
+
 	//Array with places you can visit
 	var places = ["Arklewood", "Loftwer", "Forest of Peril"];
 
+	var firstVisit = true;
+
+	//Where you currently are, used so only one place can visit a merchant
+	var currentLocation = "Loftwer";
+
+	//First location of the adventure
 	alert("You are currently in " + places[1] + ".");
 
 	//Extra information about where you can find earlier info
@@ -54,6 +65,7 @@
 	//A placeholde used when you want nothing to happend in one part of the code
 	var placeholder = false;
 
+	//Array of information that is featured in the console log
 	var consoleInfo = ["Player levelled up: ", "Current location: ", "Enemy defeated: ", "Enemy health: ", "Player health: ", "Player lost.", "Encountered: "]
 
 	//Displays info about your character
@@ -84,17 +96,29 @@
 		if (travel.toLowerCase() == "arklewood") {
 			alert("You are now in " + places[0] + ".");
 			console.log(consoleInfo[1] + places[0]);
+			currentLocation = "Arklewood";
 		}
 		else if (travel.toLowerCase() == "loftwer") {
 			alert("You are now in " + places[1] + ".");
 			console.log(consoleInfo[1] + places[1]);
+			currentLocation = "Loftwer";
 		}
 		else if (travel.toLowerCase() == "forest of peril") {
 			alert("You are now in " + places[2] + ".");
 			console.log(consoleInfo[1] + places[2]);
+			currentLocation = "Forest of Peril";
 		}
 		else {
 			alert("There is no place with that name.");
+		}
+		//Gets the element id of the button with the id of 'merchant'
+		//Then it either disables or enables it depending on where you are
+		var merchantPresent = document.getElementById('merchant');
+		if (currentLocation == "Loftwer") {
+			merchantPresent.disabled = false;
+		}
+		else {
+			merchantPresent.disabled = true;
 		}
 	}
 
@@ -221,6 +245,28 @@
 		enemyHealth = health * 0.8;
 	}
 
+	//This will be where the trading part of the game will take place
+	//Not everything is implemented, just the basic information
+	//You get a unique message the first time you click the button
+	function merchant() {
+		if (firstVisit == true) {
+			alert("You decide to investigate a store with a big sign just saying 'Wares'.\nIt is located in the corner of a street with filthy walls and roads.")
+			alert("Inside there is a frail old woman with grayish long hair and a pale white skin.\nShe says 'YOU! What is your business here?' with a raspy voice.");
+			alert("Your voice is quiet like the moon and not a single sound comes out. \nShe beckons you over with her bony finger.")
+			alert("'A quiet one, eh?'\n'No worries, we serve your kind too.'\n'An old woman has to make trypkels through some way in order to live in luxury like this.'")
+			alert("'Tell me your name and I'll let you trade for my wares.'\nYou tell her your name.")
+			alert("'" + adventurer + "? What kind of parent names their kid that?'\n'You obviously need some help with a name like that'")
+			firstVisit = false;
+		}
+		else {
+			alert("'I see you have come back'");
+		}
+		alert("'Please have a look at my wares, " + adventurer + ".' says the old woman.");
+	}
+
 //May test out adding 'number' * level inside of the attackDamage functions
 //Just to test out adding more difficulty
+
+//Idea, add a button for talking to a random NPC
+//Gives certain hints about what you can do
 </script>
