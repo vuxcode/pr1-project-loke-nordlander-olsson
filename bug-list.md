@@ -4,6 +4,7 @@
 
 Not fixed:
 
+1. Problem: You get 8x more health potions than what you bought at the merchant. Will get fixed.
 
 Fixed:
 
