@@ -39,6 +39,11 @@
   - Added a unique message the first time you encounter her
   - Created a button that is either enabled or disabled depending on current location
   - Thought of certain mechanics that might be added in the future, noted down as comment
+ 
+ - 2021-11-11 Worked for 1 hour and 15 minutes. I have done:
+  - Finalized the merchant function so that it is functional
+  - Added more information in comments
+  - Added basic money system, nothing gained from combat yet
 
 
-Total time spent: 8 hours and 15 minutes.
+Total time spent: 9 hours and 30 minutes.
