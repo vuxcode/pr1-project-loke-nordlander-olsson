@@ -15,6 +15,8 @@ REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
 11/08 - Had a bit of trouble with what could be added onto the adventure but finally got around to getting started with the merchant.
 
+11/15 - Found a bug with the healing system that had been there for a while. Fixed it.
+
 # Project Summary
 
 > Remember that before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
