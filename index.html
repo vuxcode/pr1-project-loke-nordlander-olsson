@@ -114,6 +114,7 @@
 		else {
 			alert("There is no place with that name.");
 		}
+
 		//Gets the element id of the button with the id of 'merchant'
 		//Then it either disables or enables it depending on where you are
 		var merchantPresent = document.getElementById('merchant');
@@ -177,7 +178,7 @@
 				//If you have 1 or more health potions, you can heal
 				//It will otherwise alert you that there are none to use
 				if (healthPotion > 0) {
-					if (heal.toLowerCase() == "large" || "large health potion") {
+					if (heal.toLowerCase() == "large" || heal.toLowerCase() == "large health potion") {
 						//Variable that defines how much you heal in percentage
 						//Depends on max health/global health
 						var larHealthPotion = globalHealth * 0.3;
@@ -185,6 +186,10 @@
 						health += larHealthPotion;
 						//Removes one potion so you can't heal forever
 						healthPotion -= 1;
+						console.log("Player used 1 large health potion.");
+						alert("You used a large health potion.")
+						damage = damage * level;
+						health = health - damage;
 						//If the health exceeds the max health, reverts it to the max hp
 						if (health > globalHealth) {
 							health = globalHealth;
@@ -195,10 +200,14 @@
 						}
 					}
 					//Same as the previous if statement
-					else if (action.toLowerCase() == "small" || "small health potion") {
+					else if (heal.toLowerCase() == "small" || heal.toLowerCase() == "small health potion") {
 						var smaHealthPotion = globalHealth * 0.15;
 						health += smaHealthPotion;
 						healthPotion -= 1;
+						console.log("Player used 1 small health potion.");
+						alert("You used a small health potion.")
+						damage = damage * level;
+						health = health - damage;
 						if (health > globalHealth) {
 							health = globalHealth;
 						}
@@ -212,7 +221,9 @@
 					}
 				}
 				else {
-					alert("You don't have any health potions.")
+					alert("You don't have any health potions.");
+					damage = damage * level;
+					health = health - damage;
 				}
 			}
 
@@ -229,11 +240,16 @@
 		}
 		//If the enemy has equal to or less than 0 in their health
 		//Then it alerts that you've won and gain 50 xp
+		//You also gain some money that gets alerted and put in console
 		//It also triggers the levelUp function that checks if your xp is 100
 		if (enemyHealth <= 0) {
 			xp += 50;
 			alert("You win against the " + enemy[0] + " and gain 50 experience.");
 			console.log(consoleInfo[2] + enemy[0]);
+			attackDamage(5, 10);
+			money += damage;
+			alert("The enemy had " + damage + " trypkels on him.")
+			console.log("Gained " + damage + " trypkels.")
 			console.log("Player gained 50 experience.");
 			levelUp();
 		}
@@ -248,8 +264,7 @@
 		enemyHealth = health * 0.8;
 	}
 
-	//This will be where the trading part of the game will take place
-	//Not everything is implemented, just the basic information
+	//This is the merchant function
 	//You get a unique message the first time you click the button
 	function merchant() {
 		if (firstVisit == true) {
@@ -267,20 +282,36 @@
 		alert("'Please have a look at my wares, " + adventurer + ".' says the old woman.");
 		alert("On the shelves there are a few red health potions without labels.\nThe fact that their descriptions are missing fills you with unease.");
 		alert("There are also various other wares that only serve as decorations and therefore do not interest you in the least.");
+		//Asks if you want to buy something
+		//Any other answer than yes gets you kicked out
 		var merchantQuery = prompt("'Are you interested in buying some potions?'\n'Only 8 trypkels a bottle.'");
 		if (merchantQuery.toLowerCase() == "yes") {
+			//Asks how many you would like to buy
 			var potionAmount = prompt("'How many would you like?'");
+			//Turns the string of potionAmount into a number for math reasons
 			Number(potionAmount);
+			//Saying anything above 0 results in this one working
 			if (potionAmount > 0) {
+				//Multiplies the total amount chosen by 8, the price of a bottle
 				var totalBought = potionAmount * 8;
-				if (totalBought < money) {
+				//If the total price is less or equal to your money, triggers this
+				if (totalBought <= money) {
+					//Alerts how much you bought for how much money
 					alert("'That will be " + totalBought + " trypkels for " + potionAmount + " bottles of health potions.'");
+					//Removes the total money for the paid object
 					money -= totalBought;
+					//Divides potionAmount so it returns to your original input value
+					potionAmount = totalBought / 8;
+					//Adds the amount of potions to what you currently have
 					healthPotion += potionAmount;
+					//Information in the log
+					console.log("Bought " + potionAmount + " potions.");
 				}
+				//If the price is higher than your money, no deal
 				else if (totalBought > money) {
-					alert("'Sorry but it seems like you don't have enough trypkels to buy that amount'\n'Come back when you have the right amount.'");
+					alert("'Sorry but it seems like you don't have enough trypkels for that amount.'\n'Come back when you have some more.'");
 				}
+				//Any other input will result in this
 				else {
 					alert("'I don't deal in words, you know. I am no poet.'");
 				}
@@ -296,8 +327,6 @@
 
 //Idea, add a button for talking to a random NPC
 //Gives certain hints about what you can do
-
-//Remember to add money reward after battles
 
 //Might add a max capacity for potions
 </script>
