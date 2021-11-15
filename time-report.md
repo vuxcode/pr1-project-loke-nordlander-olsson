@@ -41,9 +41,9 @@
   - Thought of certain mechanics that might be added in the future, noted down as comment
  
  - 2021-11-11 Worked for 1 hour and 15 minutes. I have done:
-  - Finalized the merchant function so that it is functional
-  - Added more information in comments
-  - Added basic money system, nothing gained from combat yet
+   - Finalized the merchant function so that it is functional
+   - Added more information in comments
+   - Added basic money system, nothing gained from combat yet
  
  - 2021-11-15 Worked for 1 hour and 25 minutes. I have done:
    - Fixed healing system
