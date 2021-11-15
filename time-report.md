@@ -46,11 +46,11 @@
   - Added basic money system, nothing gained from combat yet
  
  - 2021-11-15 Worked for 1 hour and 25 minutes. I have done:
-  - Fixed healing system
-  - Every action now results in damage inside of a battle
-  - Money can now be gained from battle, 5-10 each win
-  - Even more console log information has been added
-  - Further comments about how the program works have been added
+   - Fixed healing system
+   - Every action now results in damage inside of a battle
+   - Money can now be gained from battle, 5-10 each win
+   - Even more console log information has been added
+   - Further comments about how the program works have been added
 
 
 Total time spent: 10 hours and 55 minutes.
