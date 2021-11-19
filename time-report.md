@@ -51,6 +51,10 @@
    - Money can now be gained from battle, 5-10 each win
    - Even more console log information has been added
    - Further comments about how the program works have been added
+ 
+ - 2021-11-19 Worked for 1 hour. I have done:
+   - Added hints system
+   - New button interaction
+   - Further comments explaining how it works
 
-
-Total time spent: 10 hours and 55 minutes.
+Total time spent: 11 hours and 55 minutes.
