@@ -9,6 +9,8 @@
 
 <button onclick="merchant()" id="merchant">Merchant</button>
 
+<button onclick="hints()">Talk to bystanders</button>
+
 <script>
 	//Asks for your name in a prompt
 	var adventurer = prompt("What is your name adventurer?");
@@ -22,6 +24,7 @@
 	//Array with places you can visit
 	var places = ["Arklewood", "Loftwer", "Forest of Peril"];
 
+	//Var that specifies if you're visiting for the first time at the merchant
 	var firstVisit = true;
 
 	//Where you currently are, used so only one place can visit a merchant
@@ -71,6 +74,9 @@
 	//Array of information that is featured in the console log
 	var consoleInfo = ["Player levelled up: ", "Current location: ", "Enemy defeated: ", "Enemy health: ", "Player health: ", "Player lost.", "Encountered: "]
 
+	//Array containing different hints for the player
+	var hintsTalk = ["There is a merchant in Loftwer who sells goods for the right price.", "Healing yourself will not stop incoming damage but it will still help in battle.", "There are tons of different enemies but, for some reason, they are all the same difficulty to fight.", "Stock up on healthpotions whenever you can.", "Be careful not to make a wrong step while in a battle, nobody wants to fight an oaf."];
+
 	//Displays info about your character
 	function characterInfo() {
 		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp + "\nMoney: " + money + "\nHealth: " + health);
@@ -89,7 +95,6 @@
 		//Stops the function
 		else {
 			console.log("Player did not level up from this battle.")
-			return;
 		}
 	}
 
@@ -322,11 +327,18 @@
 		} 
 	}
 
+	//Function that tells a player hints for the game
+	function hints() {
+		alert("You speak to one of the bystanders in " + currentLocation + ".");
+		alert("The bystander says '" + hintsTalk[0] + "'");
+		//Removes the the first text in the array, number 0
+		var lastHint = hintsTalk.shift();
+		//Outputs it in the log in case player forgot
+		console.log("A bystander told you this: " + lastHint);
+	}
+
 //May test out adding 'number' * level inside of the attackDamage functions
 //Just to test out adding more difficulty
-
-//Idea, add a button for talking to a random NPC
-//Gives certain hints about what you can do
 
 //Might add a max capacity for potions
 </script>
