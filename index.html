@@ -75,11 +75,27 @@
 	var consoleInfo = ["Player levelled up: ", "Current location: ", "Enemy defeated: ", "Enemy health: ", "Player health: ", "Player lost.", "Encountered: "]
 
 	//Array containing different hints for the player
-	var hintsTalk = ["There is a merchant in Loftwer who sells goods for the right price.", "Healing yourself will not stop incoming damage but it will still help in battle.", "There are tons of different enemies but, for some reason, they are all the same difficulty to fight.", "Stock up on healthpotions whenever you can.", "Be careful not to make a wrong step while in a battle, nobody wants to fight an oaf."];
+	var hintsTalk = ["There is a merchant in Loftwer who sells goods for the right price.", "Healing yourself will not stop incoming damage but it will still help in battle.", "There are tons of different enemies but, for some reason, they are all the same difficulty to fight.", "Stock up on healthpotions whenever you can.", "Be careful not to make a wrong step while in a battle, nobody wants to fight an oaf.", "Enemies carry coins that may be of use to you.", "If you want to be reminded of something from your journey, be sure to 'console' your inner self."];
 
 	//Displays info about your character
 	function characterInfo() {
 		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp + "\nMoney: " + money + "\nHealth: " + health);
+	}
+
+	//Function that can trigger the final battle depending on level and player's choice
+	function endGame() {
+		if (level >= 5) {
+			var finalBattle = prompt("It seems your journey has yielded you more prowess in battle.\nAre you ready to fight your hardest battle yet?\nYou should prepare yourself by stocking up on items, there will be more chances to fight this battle after levelling up.");
+			if (finalBattle.toLowerCase() == "yes") {
+				alert("A huge beast with one eye and three arms appear.\nHe says 'Fight me weakling or perish like a squished bug'.")
+			}
+			else {
+				alert("You decide that more preparation is needed before you attempt something that endangers your life.");
+			}
+		}
+		else {
+			console.log("You're level is not high enough for the toughest battle.");
+		}
 	}
 
 	//A function that tells you when you've levelled up and the level you reached
@@ -90,7 +106,8 @@
 			level++;
 			alert("Congrats, you are now level " + level + ".");
 			xp = 0;
-			console.log(consoleInfo[0] + level);			
+			console.log(consoleInfo[0] + level);
+			endGame();
 		}
 		//Stops the function
 		else {
