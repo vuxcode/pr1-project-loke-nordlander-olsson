@@ -56,5 +56,10 @@
    - Added hints system
    - New button interaction
    - Further comments explaining how it works
-
-Total time spent: 11 hours and 55 minutes.
+ 
+ - 2021-11-22 Worked for 1 hour. I have done:
+   - Began work on the final battle, will probably have a unique battle system compared to the normal one
+   - Added 2 new hints
+   - Experimented with adding colors to console log info, didn't work as I wanted and scrapped the idea for the moment
+ 
+Total time spent: 12 hours and 55 minutes.
