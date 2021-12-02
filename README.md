@@ -17,6 +17,8 @@ REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
 11/15 - Found a bug with the healing system that had been there for a while. Fixed it.
 
+12/02 - It has gotten a bit tiring to work on this project with only a few weeks left. My head is just full of new information.
+
 # Project Summary
 
 > Remember that before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
