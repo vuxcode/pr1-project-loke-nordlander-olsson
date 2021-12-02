@@ -5,6 +5,7 @@
 Not fixed:
 
 1. Problem: The damage from the boss increases after the user heals themself.
+2. Problem: Lots of structural coding problems and messages not appearing. 
 
 Fixed:
 
