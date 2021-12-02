@@ -62,4 +62,8 @@
    - Added 2 new hints
    - Experimented with adding colors to console log info, didn't work as I wanted and scrapped the idea for the moment
  
-Total time spent: 12 hours and 55 minutes.
+ - 2021-12-02 Worked for 1 hour and 5 minutes. I have done:
+   - Worked on revising the bossBattle function according to the regular battle one
+   - Added debug mode for levelling up
+ 
+Total time spent: 14 hours and 0 minutes.
