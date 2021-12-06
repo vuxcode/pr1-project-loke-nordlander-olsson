@@ -19,6 +19,8 @@ REMEMBER TO "COMMIT" YOUR CHANGES TO THIS FILE!
 
 12/02 - It has gotten a bit tiring to work on this project with only a few weeks left. My head is just full of new information.
 
+12/06 - I am pretty much finished with the project, it has the implemented system and functions that I planned for. It also has an ending and the structure of the code seems semantic.
+
 # Project Summary
 
 > Remember that before the final submission date you should include a "PROJECT SUMMARY" in this section here. 
