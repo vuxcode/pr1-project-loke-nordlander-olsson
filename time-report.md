@@ -66,4 +66,11 @@
    - Worked on revising the bossBattle function according to the regular battle one
    - Added debug mode for levelling up
  
-Total time spent: 14 hours and 0 minutes.
+ - 2021-12-06 Worked for 1 hour and 40 minutes. I have done:
+   - Finished up the boss battle
+   - Added an ending for when you defeat the boss with a sound
+   - Fixed healing making the damage increase
+   - Added more comments describing the code
+   - Pretty much finished with what I wanted to add
+ 
+Total time spent: 15 hours and 40 minutes.
