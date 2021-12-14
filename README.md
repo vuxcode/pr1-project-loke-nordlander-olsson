@@ -38,11 +38,19 @@ When it comes to the budget, I have gone way lower than the expected time. I did
 > Write a clear user guide for how someone should use your program.
 
 Write in your name in the text box, read through the text in the boxes and click okay each time you're done reading. After you have clicked away all the boxes, you may decide your next step. Right click and left click the 'Inspect' option to look at the console log.
+
 Clicking locations will display all the available locations you may currently visit. 
+
 Clicking move will display a box asking where you want to go, write in one of the locations from the locations button and you will be transported there. 
+
 Clicking attack will make a random enemy appear, this will lead to a textbox asking which move you wanna use. Writing in attack will make you attack the enemy and vice versa resulting in both parties losing health. Writing in defend will negate some of the damage from the enemy attack. Writing in heal will ask you what kind of potion you wanna use, write in either small/small health potion or big/big health potion to heal yourself. This will result in you regaining some health to further minimalise the risk of death. If the enemy loses all their health then you win and gain some money plus experience. Hpwever, if you lose then you gain nothing.
+
 Clicking character will display a box containing information about you, the player. Here you can see your name, class, current level, amount of experience, money and current health.
+
 Clicking merchant will let you travel to the store. In the store there are potions that you can buy from the clerk in exchange for trypkels, this world's currency. She will ask you if you wanna buy some potions, writing yes will lead to a second screen while anything else will remove you from the store. After saying yes, she will ask you how many potions you wanna buy. Writing in a number will multiply that by the price and if you don't have enough then you will be kicked out. If you do have enough then the specified amount of money will be removed from your character and you will gain the amount of potions you wrote in.
+
 Clicking talk to bystanders will lead to you speaking to an NPC (Non-Player Character). This character will give you a hint that is stored in the console log.
+
 When you reach a certain level, a box will pop up asking you if you are ready to fight the final boss. Saying yes will start the final battle and anything else will let you continue on like earlier until the next level up. The final boss battle works like any previous battle, except that the boss has a set health and does not scale with the player. The boss also does not attack after the player heals compared to regular enemies.
+
 Defeating the boss will lead to a sound playing and declaring you a winner that destroyed the world. After this the window will close.
