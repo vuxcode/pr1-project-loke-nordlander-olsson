@@ -36,6 +36,7 @@ When it comes to the budget, I have gone way lower than the expected time. I did
 # User Guide
 
 > Write a clear user guide for how someone should use your program.
+
 Write in your name in the text box, read through the text in the boxes and click okay each time you're done reading. After you have clicked away all the boxes, you may decide your next step. Right click and left click the 'Inspect' option to look at the console log.
 Clicking locations will display all the available locations you may currently visit. 
 Clicking move will display a box asking where you want to go, write in one of the locations from the locations button and you will be transported there. 
