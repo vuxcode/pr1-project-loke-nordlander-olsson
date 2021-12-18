@@ -1,1 +1,519 @@
-<!-- Start writing your project code in this file! -->
+<!-- Various buttons with different functions -->
+<button onclick="locations()">Locations</button>
+
+<button onclick="move()">Move</button>
+
+<button onclick="attack()">Attack</button>
+
+<button onclick="characterInfo()">Character</button>
+
+<button id="merchant" onclick="merchant()">Merchant</button>
+
+<button onclick="hints()">Talk to bystanders</button>
+
+<button id="debug" onclick="increaseLevel()">Level up</button>
+
+<script>
+	//Asks for your name in a prompt
+	var adventurer = prompt("What is your name adventurer?");
+
+	//Explains your fate
+	alert("Your name is " + adventurer + ", a cultist from the town of Arklewood.\nYou come from a long line of cultists with a mysterious past.\nYour goal is to break away from tradition and pursue a new path in life.");
+
+	//If the player names themself Debug then the button with the id
+	//will be displayed in the browser window
+	if (adventurer != "Debug") {
+		var debug = document.getElementById("debug");
+		debug.style.display = "none";
+	}
+
+	//Hint for where you can find potions
+	alert("There is only one known merchant in the area and she resides in a small cornerstore in Loftwer.\nBe careful though, she may not offer what you seek.");
+
+	//Array with places you can visit
+	var places = ["Arklewood", "Loftwer", "Forest of Peril"];
+
+	//Var that specifies if you're visiting for the first time at the merchant
+	var firstVisit = true;
+
+	//Where you currently are, used so only one place can visit a merchant
+	var currentLocation = "Loftwer";
+
+	//First location of the adventure
+	alert("You are currently in " + places[1] + ".");
+
+	//Extra information about where you can find earlier info
+	alert("Check the console for previously attained information of your current playthrough.");
+	
+	//Shows where you can go
+	function locations() {
+		alert("The following locations are available:\n" + places[0] + "\n" + places[1] + "\n" + places[2]);
+	}
+
+	//Character base level
+	var level = 1;
+
+	//Character base experience
+	var xp = 0;
+
+	//Character health
+	var health = 100 * level;
+
+	//The global character health, used in levelling up
+	var globalHealth = health;
+
+	//Second variable that increases by each level, used to define a threshold
+	//for healing
+	var globalHealth2 = 100;
+
+	//The enemies you'll encounter in the game
+	var enemy = ["Goblin", "Troll", "Bandit", "Sorcerer", "Skeleton", "Drunk"];
+
+	//Health of enemy, 80% of the player's health
+	var enemyHealth = health * 0.8;
+
+	//Base damage, used in the attackDamage function
+	var damage = 0;
+
+	//The base amount of health potions that the user starts with
+	var healthPotion = 3;
+
+	//Base amount of starting trypkels, this game's currency
+	var money = 10;
+
+	//A placeholde used when you want nothing to happend in one part of the code
+	var placeholder = false;
+
+	//Array of information that is featured in the console log
+	var consoleInfo = ["Player levelled up: ", "Current location: ", "Enemy defeated: ", "Enemy health: ", "Player health: ", "Player lost.", "Encountered: "];
+
+	//Array containing different hints for the player
+	var hintsTalk = ["There is a merchant in Loftwer who sells goods for the right price.", "Healing yourself will not stop incoming damage but it will still help in battle.", "There are tons of different enemies but, for some reason, they are all the same difficulty to fight.", "Stock up on healthpotions whenever you can.", "Be careful not to make a wrong step while in a battle, nobody wants to fight an oaf.", "Enemies carry coins that may be of use to you.", "If you want to be reminded of something from your journey, be sure to 'console' your inner self."];
+
+	//Displays info about your character
+	function characterInfo() {
+		alert("Name: " + adventurer + "\nClass: Cultist" + "\nLevel: " + level + "\nExperience: " + xp + "\nMoney: " + money + "\nHealth: " + health);
+	}
+
+	//The health for the boss
+	var bossHealth = 2000;
+
+	//Final battle success sound
+	function bossSuccessSound() {
+		//Defines new sound to a variable with the help of the mp3
+		var success = new Audio("success.mp3");
+		//Sets the volume to 40% of the default value
+		success.volume = 0.4;
+		//Plays the sound
+		success.play();
+		//When the sound ends, it triggers this function
+		success.onended = function() {
+			alert("The boss takes one final breath and falls back dead on the ground.");
+			alert("The world could not take the power of your victory and has imploded on itself.");
+			//Closes the window
+			window.close();
+		}
+	}
+
+	//Function that can trigger the final battle depending on level and player's choice
+	function endGame() {
+		if (level >= 5) {
+			var finalBattle = prompt("It seems your journey has yielded you more prowess in battle.\nAre you ready to fight your hardest battle yet?\nYou should prepare yourself by stocking up on items, there will be more chances to fight this battle after levelling up.");
+			if (finalBattle.toLowerCase() == "yes") {
+				alert("A huge beast with one eye and three arms appear.\nHe says 'Fight me weakling or perish like a squished bug'.");
+				bossBattle();
+			}
+			else {
+				alert("You decide that more preparation is needed before you attempt something that endangers your life.");
+			}
+		}
+		else {
+			console.log("Your level is not high enough for the toughest battle.");
+		}
+	}
+
+	//A function that tells you when you've levelled up and the level you reached
+	function levelUp() {
+		//If xp is equal to or higher than 100, your level increases and congratulates you
+		//It then resets the xp
+		if (xp >= 100) {
+			level++;
+			alert("Congrats, you are now level " + level + ".");
+			xp = 0;
+			console.log(consoleInfo[0] + level);
+			health = globalHealth * level;
+			globalHealth2 = health;
+			endGame();
+		}
+		//Information in the console log
+		else {
+			console.log("Player did not level up from this battle.")
+		}
+	}
+
+	function increaseLevel() {
+		xp += 100;
+		levelUp();
+	}
+
+	//Move your character to a different location
+	function move() {
+		var travel = prompt("Where do you want to go?");
+		if (travel.toLowerCase() == "arklewood") {
+			alert("You are now in " + places[0] + ".");
+			console.log(consoleInfo[1] + places[0]);
+			currentLocation = "Arklewood";
+		}
+		else if (travel.toLowerCase() == "loftwer") {
+			alert("You are now in " + places[1] + ".");
+			console.log(consoleInfo[1] + places[1]);
+			currentLocation = "Loftwer";
+		}
+		else if (travel.toLowerCase() == "forest of peril") {
+			alert("You are now in " + places[2] + ".");
+			console.log(consoleInfo[1] + places[2]);
+			currentLocation = "Forest of Peril";
+		}
+		else {
+			alert("There is no place with that name.");
+		}
+
+		//Gets the element id of the button with the id of 'merchant'
+		//Then it either disables or enables it depending on where you are
+		var merchantPresent = document.getElementById('merchant');
+		if (currentLocation == "Loftwer") {
+			//False means that the button isn't disabled
+			merchantPresent.disabled = false;
+		}
+		else {
+			//True means that the button is disabled
+			merchantPresent.disabled = true;
+		}
+	}
+
+	//Picks a number between minimum and maximum to randomize damage
+	//Math.floor takes the closest lower integer, in the case of 8.74 it would
+	//become 8.
+	//Math.random picks a random number between 0 and 1 which means it could pick
+	//0.515. Let's say that Math.random picks 0.546 then it turns into 0.5.
+	//0.5 gets multiplied by the total of the amount in the round brackets.
+	//0.515 * (20 - 10 + 1) + 10 = 15.665 but with Math.floor it becomes 15.
+	//If you understand BIDMAS then Math.floor would be calculated last.
+	//BIDMAS is used for children to understand in which order math problems are
+	//calculated in. Problems within brackets are always first.
+	function attackDamage(min, max) {
+		min = Math.ceil(min);
+		max = Math.floor(max);
+		damage = Math.floor(Math.random() * (max - min + 1) + min);
+	}
+
+	//Function for the battle system
+	function attack() {
+		//Sorts the enemy and then randomizes them
+		enemy.sort(() => Math.random() - 0.5);
+		alert("You encounter a " + enemy[0] + ".");
+		console.log(consoleInfo[6] + enemy[0]);
+		//While enemy's health or your health is above 0, the fight continues
+		while (enemyHealth > 0 && health > 0) {
+			//Asks what move you wanna use
+			var action = prompt("Do you want to 'attack', 'defend' or 'heal'?\nWrite which move you wanna use or click cancel if you want to leave the fight.");
+			//Depending on what you write in, different moves are done
+			//Writing in attack makes the attackDamage function randomize a number
+			//It then multiplies it by the level your character is at and removes the damage from their health
+			//Then it does the same thing for the enemy
+			if (action.toLowerCase() == "attack") {
+				attackDamage(15, 30);
+				damage = damage * level;
+				enemyHealth = enemyHealth - damage;
+				alert("The " + enemy[0] + " took " + damage + " damage and now has " + enemyHealth + " healthpoints.");
+				console.log("Enemy took " + damage + " points of damage.");
+				console.log(consoleInfo[3] + enemyHealth);
+				attackDamage(10, 25);
+				damage = damage * level;
+				health = health - damage;
+			}
+			//Triggers the enemy attack damage that gets multiplied by level
+			//Then it divides it by 1.3 and rounds it to the closest integer
+			//Then it subtracts the damage from the health
+			else if (action.toLowerCase() == "defend") {
+				attackDamage(10, 25);
+				damage = damage * level;
+				damage = damage / 1.3;
+				damage = Math.round(damage);
+				health = health - damage;
+				alert("You blocked the attack and negated some of the damage.");
+			}
+			//Choosing heal will give you more healthpoints
+			else if (action.toLowerCase() == "heal") {
+				//Tells you how many health potions you have left
+				alert("You have " + healthPotion + " health potions left.")
+				//Asks which health potion you want to use
+				var heal = prompt("Do you wanna use a large or small health potion?");
+				attackDamage(10, 25);
+				damage = damage * level;
+				//If you have 1 or more health potions, you can heal
+				//It will otherwise alert you that there are none to use
+				if (healthPotion > 0) {
+					if (heal.toLowerCase() == "large" || heal.toLowerCase() == "large health potion") {
+						//Variable that defines how much you heal in percentage
+						//Depends on max health/global health
+						var larHealthPotion = globalHealth2 * 0.3;
+						//Adds that number to the health
+						health += larHealthPotion;
+						//Removes one potion so you can't heal forever
+						healthPotion -= 1;
+						console.log("Player used 1 large health potion.");
+						alert("You used a large health potion.")
+						damage = damage * level;
+						health = health - damage;
+						//If the health exceeds the max health, reverts it to the max hp
+						if (health > globalHealth2) {
+							health = globalHealth2;
+						}
+						//Placeholder, nothing happens
+						else {
+							placeholder;
+						}
+					}
+					//Same as the previous if statement
+					else if (heal.toLowerCase() == "small" || heal.toLowerCase() == "small health potion") {
+						var smaHealthPotion = globalHealth2 * 0.15;
+						health += smaHealthPotion;
+						healthPotion -= 1;
+						console.log("Player used 1 small health potion.");
+						alert("You used a small health potion.")
+						damage = damage * level;
+						health = health - damage;
+						if (health > globalHealth2) {
+							health = globalHealth2;
+						}
+						else {
+							placeholder;
+						}
+					}
+					//If you write in anything else then it tells you this
+					else {
+						alert("Please pick a large or small health potion. Nothing else.");
+					}
+				}
+				else {
+					alert("You don't have any health potions.");
+					damage = damage * level;
+					health = health - damage;
+				}
+			}
+
+			//Alerts you if you write in an invalid command
+			//Returns to the beginning of the attack function and starts over
+			else {
+				alert("You accidentally trip and the enemy doesn't even bother to fight you.");
+				return attack();
+			}
+			//Tells you how much damage you took and how much health you have now
+			alert("You took " + damage + " damage and your health is now " + health + ".");
+			console.log("Player took " + damage + " points of damage.");
+			console.log(consoleInfo[4] + health);
+		}
+		//If the enemy has equal to or less than 0 in their health
+		//Then it alerts that you've won and gain 50 xp
+		//You also gain some money that gets alerted and put in console
+		//It also triggers the levelUp function that checks if your xp is 100
+		if (enemyHealth <= 0) {
+			xp += 50;
+			alert("You win against the " + enemy[0] + " and gain 50 experience.");
+			console.log(consoleInfo[2] + enemy[0]);
+			attackDamage(5, 10);
+			money += damage;
+			alert("The enemy had " + damage + " trypkels on him.")
+			console.log("Gained " + damage + " trypkels.")
+			console.log("Player gained 50 experience.");
+			levelUp();
+		}
+		//Tells you that you lost against the enemy
+		else {
+			alert("You lost against the " + enemy[0] + " and gain nothing.")
+			console.log(consoleInfo[5] + enemy[0]);
+		}
+		//Resets your health to 100 and multiplies it by level
+		//Same for the enemy except it multiplies from your health by 0.8
+		health = 100 * level;
+		enemyHealth = health * 0.8;
+	}
+
+	//This is the merchant function
+	//You get a unique message the first time you click the button
+	function merchant() {
+		if (firstVisit == true) {
+			alert("You decide to investigate a store with a big sign just saying 'Wares'.\nIt is located in the corner of a street with filthy walls and roads.")
+			alert("Inside there is a frail old woman with grayish long hair and pale white skin.\nShe says 'YOU! What is your business here?' with a raspy voice.");
+			alert("Your voice is quiet like the moon and not a single sound comes out. \nShe beckons you over with her bony finger.")
+			alert("'A quiet one, eh?'\n'No worries, we serve your kind too.'\n'An old woman has to make trypkels through some way in order to live in luxury like this.'")
+			alert("'Tell me your name and I'll let you trade for my wares.'\nYou tell her your name.")
+			alert("'" + adventurer + "? What kind of parent names their kid that?'\n'You obviously need some help with a name like that'")
+			firstVisit = false;
+		}
+		else {
+			alert("'I see you have come back'");
+		}
+		alert("'Please have a look at my wares, " + adventurer + ".' says the old woman.");
+		alert("On the shelves there are a few red health potions without labels.\nThe fact that their descriptions are missing fills you with unease.");
+		alert("There are also various other wares that only serve as decorations and therefore do not interest you in the least.");
+		//Asks if you want to buy something
+		//Any other answer than yes gets you kicked out
+		var merchantQuery = prompt("'Are you interested in buying some potions?'\n'Only 8 trypkels a bottle.'");
+		if (merchantQuery.toLowerCase() == "yes") {
+			//Asks how many you would like to buy
+			var potionAmount = prompt("'How many would you like?'");
+			//Turns the string of potionAmount into a number for math reasons
+			Number(potionAmount);
+			//Saying anything above 0 results in this one working
+			if (potionAmount > 0) {
+				//Multiplies the total amount chosen by 8, the price of a bottle
+				var totalBought = potionAmount * 8;
+				//If the total price is less or equal to your money, triggers this
+				if (totalBought <= money) {
+					//Alerts how much you bought for how much money
+					alert("'That will be " + totalBought + " trypkels for " + potionAmount + " bottles of health potions.'");
+					//Removes the total money for the paid object
+					money -= totalBought;
+					//Divides potionAmount so it returns to your original input value
+					potionAmount = totalBought / 8;
+					//Adds the amount of potions to what you currently have
+					healthPotion += potionAmount;
+					//Information in the log
+					console.log("Bought " + potionAmount + " potions.");
+				}
+				//If the price is higher than your money, no deal
+				else if (totalBought > money) {
+					alert("'Sorry but it seems like you don't have enough trypkels for that amount.'\n'Come back when you have some more.'");
+				}
+				//Any other input will result in this
+				else {
+					alert("'I don't deal in words, you know. I am no poet.'");
+				}
+			}
+		}
+		else {
+			alert("'If you can't decide right now then please get out of my store.'");
+		} 
+	}
+
+	//Function that tells a player hints for the game
+	function hints() {
+		alert("You speak to one of the bystanders in " + currentLocation + ".");
+		alert("The bystander says '" + hintsTalk[0] + "'");
+		//Removes the the first text in the array, number 0
+		var lastHint = hintsTalk.shift();
+		//Outputs it in the log in case player forgot
+		console.log("A bystander told you this: " + lastHint);
+	}
+
+	//Final boss battle attack
+	function bossBattle() {
+		//Console log info
+		console.log("Player started the final battle.");
+		//While the boss health and your health is above 0, the fight continues
+		while (bossHealth > 0 && health > 0) {
+			//Asks what move you wanna use
+			var action = prompt("Do you want to 'attack', 'defend' or 'heal'?\nWrite which move you wanna use or click cancel if you want to leave the fight.");
+			//Depending on what you write in, different moves are done
+			//Writing in attack makes the attackDamage function randomize a number
+			//It then multiplies it by the level your character is at and removes the damage from their health
+			//Then it does the same thing for you
+			if (action.toLowerCase() == "attack") {
+				attackDamage(15, 30);
+				damage = damage * level;
+				bossHealth = bossHealth - damage;
+				alert("The boss took " + damage + " damage and now has " + bossHealth + " healthpoints.");
+				console.log("Boss took " + damage + " points of damage.");
+				console.log(consoleInfo[3] + bossHealth);
+				attackDamage(10, 25);
+				damage = damage * level;
+				health = health - damage;
+			}
+			//Triggers the boss attack damage that gets multiplied by level
+			//Then it divides it by 1.3 and rounds it to the closest integer
+			//Then it subtracts the damage from the health
+			else if (action.toLowerCase() == "defend") {
+				attackDamage(10, 25);
+				damage = damage * level;
+				damage = damage / 1.3;
+				damage = Math.round(damage);
+				health = health - damage;
+				alert("You blocked the attack and negated some of the damage.");
+			}
+			//Choosing heal will give you more healthpoints
+			else if (action.toLowerCase() == "heal") {
+				attackDamage(10, 25);
+				//Tells you how many healt potions you have left
+				alert("You have " + healthPotion + " health potions left.")
+				//Asks which health potion you want to use
+				var heal = prompt("Do you wanna use a large or small health potion?");
+				//If you have 1 or more health potions, you can heal
+				//It will otherwise alert you that there are none to use
+				if (healthPotion > 0) {
+					if (heal.toLowerCase() == "large" || heal.toLowerCase() == "large health potion") {
+						//Variable that defines how much you heal in percentage
+						//Depends on max health/global health
+						var larHealthPotion = globalHealth2 * 0.3;
+						//Adds that number to the health
+						health += larHealthPotion;
+						//Removes one potion so you can't heal forever
+						healthPotion -= 1;
+						console.log("Player used 1 large health potion.");
+						alert("You used a large health potion.")
+						//If the health exceeds the max health, reverts it to the max hp
+						if (health > globalHealth2) {
+							health = globalHealth2;
+						}
+						//Placeholder, nothing happens
+						else {
+							placeholder;
+						}
+						return bossBattle();
+					}
+					//Same as the previous if statement
+					else if (heal.toLowerCase() == "small" || heal.toLowerCase() == "small health potion") {
+						var smaHealthPotion = globalHealth2 * 0.15;
+						health += smaHealthPotion;
+						healthPotion -= 1;
+						console.log("Player used 1 small health potion.");
+						alert("You used a small health potion.")
+						if (health > globalHealth2) {
+							health = globalHealth2;
+						}
+						else {
+							placeholder;
+						}
+						return bossBattle();
+					}
+					//If you write in anything else then it tells you this
+					else {
+						alert("Please pick a large or small health potion. Nothing else.");
+					}
+				}
+				else {
+					alert("You don't have any health potions.");
+					damage = damage * level;
+					health = health - damage;
+				}
+			}
+			//Tells you how much damage you took and how much health you have now
+			alert("You took " + damage + " damage and your health is now " + health + ".");
+			console.log("Player took " + damage + " points of damage.");
+			console.log(consoleInfo[4] + health);	
+		}
+		if (health <= 0 || bossHealth <= 0) {
+			if (bossHealth <= 0) {
+				bossSuccessSound();
+			}
+			else if (health <= 0) {
+				alert("The large beast laughs at you and wanders off.");
+				//Resets the boss' health if the player fails the battle
+				bossHealth = 2000;
+			}
+		}
+	}
+
+//Might add a max capacity for potions
+</script>
