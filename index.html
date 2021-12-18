@@ -264,6 +264,8 @@
 						healthPotion -= 1;
 						console.log("Player used 1 large health potion.");
 						alert("You used a large health potion.")
+						damage = damage * level;
+						health = health - damage;
 						//If the health exceeds the max health, reverts it to the max hp
 						if (health > globalHealth2) {
 							health = globalHealth2;
